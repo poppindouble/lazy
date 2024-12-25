@@ -11,6 +11,7 @@ return {
     },
   },
   {
+    -- Auto formatting
     'stevearc/conform.nvim',
     opts = {
       formatters_by_ft = {
@@ -36,6 +37,7 @@ return {
     end,
   },
   {
+    -- Auto completion
     "hrsh7th/nvim-cmp",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
