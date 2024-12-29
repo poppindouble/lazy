@@ -100,7 +100,6 @@ return {
 				"stylua", -- Used to format Lua code
 				"isort", -- Used to format python code
 				"black", -- Used to format python code
-				"ast-grep", -- Used to format rust code
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
@@ -123,7 +122,7 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				python = { "isort", "black" },
-				rust = { "ast-grep" },
+				rust = { "rustfmt" },
 			},
 			format_on_save = {
 				timeout_ms = 500,
