@@ -93,6 +93,7 @@ return {
 				pyright = {},
 				lua_ls = {},
 				rust_analyzer = {},
+				verible = {},
 			}
 			-- Ensure the servers and tools above are installed
 			require("mason").setup()
@@ -105,6 +106,7 @@ return {
 				"isort", -- Used to format python code
 				"black", -- Used to format python code
 				"clang-format", -- Used to format c code
+				"verible", -- Used to format verilog and systemverilog code
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
@@ -129,6 +131,8 @@ return {
 				python = { "isort", "black" },
 				rust = { "rustfmt" },
 				c = { "clang-format" },
+				verilog = { "verible" },
+				systemverilog = { "verible" },
 			},
 			format_on_save = {
 				timeout_ms = 500,
