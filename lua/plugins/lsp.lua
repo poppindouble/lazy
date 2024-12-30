@@ -22,6 +22,10 @@ return {
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			-- Allows extra capabilities provided by nvim-cmp
 			"hrsh7th/cmp-nvim-lsp",
+
+			-- Useful status updates for LSP.
+			-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+			{ "j-hui/fidget.nvim", opts = {} },
 		},
 		config = function()
 			--  This function gets run when an LSP attaches to a particular buffer.
@@ -84,9 +88,9 @@ return {
 
 			-- Enable the following language servers
 			local servers = {
-				-- clangd = {},
+				clangd = {},
 				-- gopls = {},
-				-- pyright = {},
+				pyright = {},
 				lua_ls = {},
 				rust_analyzer = {},
 			}
@@ -100,6 +104,7 @@ return {
 				"stylua", -- Used to format Lua code
 				"isort", -- Used to format python code
 				"black", -- Used to format python code
+				"clang-format", -- Used to format c code
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
@@ -123,6 +128,7 @@ return {
 				lua = { "stylua" },
 				python = { "isort", "black" },
 				rust = { "rustfmt" },
+				c = { "clang-format" },
 			},
 			format_on_save = {
 				timeout_ms = 500,

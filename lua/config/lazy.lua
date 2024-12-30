@@ -19,7 +19,7 @@ vim.opt.runtimepath:prepend(lazypath)
 -- loading lazy.nvim so that mappings are correct.
 -- This is also a good place to setup other settings (vim.opt)
 vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+vim.g.maplocalleader = " "
 
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
@@ -35,8 +35,6 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 vim.opt.undofile = true
-
-vim.g.have_nerd_font = true
 
 vim.opt.clipboard = "unnamedplus"
 
