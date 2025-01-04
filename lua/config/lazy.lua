@@ -38,6 +38,10 @@ vim.opt.undofile = true
 
 vim.opt.clipboard = "unnamedplus"
 
+vim.keymap.set("n", "<C-W>d", function()
+	vim.diagnostic.open_float()
+end, { desc = "Show diagnostics under the cursor" })
+
 -- Setup lazy.nvim
 require("lazy").setup({
 	spec = {
