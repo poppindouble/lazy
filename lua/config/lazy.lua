@@ -42,6 +42,12 @@ vim.keymap.set("n", "<C-W>d", function()
 	vim.diagnostic.open_float()
 end, { desc = "Show diagnostics under the cursor" })
 
+-- Map `>` in Visual Mode to indent and reselect
+vim.api.nvim_set_keymap("v", ">", ">gv", { noremap = true, silent = true })
+
+-- Map `<` in Visual Mode to dedent and reselect
+vim.api.nvim_set_keymap("v", "<", "<gv", { noremap = true, silent = true })
+
 -- Setup lazy.nvim
 require("lazy").setup({
 	spec = {
