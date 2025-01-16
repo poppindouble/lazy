@@ -20,6 +20,10 @@ return {
 			require("telescope").setup({
 				defaults = {
 					path_display = { "smart" },
+					layout_strategy = "vertical",
+					layout_config = {
+						preview_cutoff = 1, -- Preview always shown
+					},
 				},
 				extensions = {
 					-- FZF makes Telescope searching faster
