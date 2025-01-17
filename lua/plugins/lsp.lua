@@ -142,13 +142,14 @@ return {
 				verilog = { "verible" },
 				systemverilog = { "verible" },
 			},
-			format_on_save = {
-				timeout_ms = 500,
-				lsp_format = "fallback",
-			},
+			-- format_on_save = {
+			-- 	timeout_ms = 500,
+			-- 	lsp_format = "fallback",
+			-- },
 		},
 		config = function(_, opts)
 			require("conform").setup(opts)
+			vim.keymap.set("n", "<leader>fm", require("conform").format, { desc = "For[m]at" })
 		end,
 	},
 	{
