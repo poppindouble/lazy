@@ -149,7 +149,7 @@ return {
 		},
 		config = function(_, opts)
 			require("conform").setup(opts)
-			vim.keymap.set("n", "<leader>fm", require("conform").format, { desc = "For[m]at" })
+			vim.keymap.set("n", "<leader>f", require("conform").format, { desc = "[F]ormat" })
 		end,
 	},
 	{
