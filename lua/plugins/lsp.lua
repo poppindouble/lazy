@@ -99,7 +99,9 @@ return {
 				pyright = {},
 				lua_ls = {},
 				rust_analyzer = {},
-				verible = {},
+				verible = {
+					cmd = { "verible-verilog-ls", "--rules=-line-length,-no-tabs" },
+				},
 			}
 			-- Ensure the servers and tools above are installed
 			require("mason").setup()
