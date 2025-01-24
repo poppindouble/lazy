@@ -153,6 +153,15 @@ return {
 				end,
 				group = nvim_metals_group,
 			})
+			-- vim.api.nvim_create_autocmd("FileType", {
+			-- 	pattern = self.ft,
+			-- 	callback = function()
+			-- 		vim.keymap.set("n", "<leader>m", function()
+			-- 			vim.lsp.buf.format({ async = true })
+			-- 		end, { buffer = true, desc = "Format Scala/SBT/Java" })
+			-- 	end,
+			-- 	group = nvim_metals_group,
+			-- })
 		end,
 	},
 	{
@@ -164,6 +173,7 @@ return {
 				python = { "isort", "black" },
 				rust = { "rustfmt" },
 				c = { "clang-format" },
+				cpp = { "clang-format" },
 				verilog = { "verible" },
 				systemverilog = { "verible" },
 			},
@@ -174,7 +184,16 @@ return {
 		},
 		config = function(_, opts)
 			require("conform").setup(opts)
-			vim.keymap.set("n", "<leader>f", require("conform").format, { desc = "[F]ormat" })
+			-- In your conform.nvim config:
+			vim.keymap.set("n", "<leader>f", function()
+				local filetype = vim.bo.filetype
+				-- Use LSP formatting for Metals-supported filetypes
+				if vim.tbl_contains({ "scala", "sbt", "java" }, filetype) then
+					vim.lsp.buf.format({ async = true })
+				else
+					require("conform").format()
+				end
+			end, { desc = "[F]ormat" })
 		end,
 	},
 	{
