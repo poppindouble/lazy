@@ -34,6 +34,12 @@ vim.opt.smartcase = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
+-- Search for the word under the cursor without jumping
+vim.keymap.set('n', '*', function()
+  vim.fn.setreg('/', '\\<' .. vim.fn.expand('<cword>') .. '\\>')
+  vim.opt.hlsearch = true
+end, { desc = 'Search for word under cursor (no jump)' })
+
 vim.opt.undofile = true
 
 vim.opt.clipboard = "unnamedplus"

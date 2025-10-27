@@ -3,6 +3,9 @@ return {
 	{
 		"tpope/vim-vinegar",
 	},
+	{
+		"tpope/vim-fugitive",
+	},
 	{ -- Add indentation guides even on blank lines
 		"lukas-reineke/indent-blankline.nvim",
 		-- Enable `lukas-reineke/indent-blankline.nvim`
