@@ -17,12 +17,25 @@ return {
 			},
 		},
 		config = function()
+			local actions = require("telescope.actions")
 			require("telescope").setup({
 				defaults = {
 					path_display = { "smart" },
 					layout_strategy = "vertical",
 					layout_config = {
 						preview_cutoff = 1, -- Preview always shown
+					},
+				},
+				pickers = {
+					buffers = {
+						mappings = {
+							i = {
+								["<C-x>"] = actions.delete_buffer, -- Delete with Ctrl+x
+							},
+							n = {
+								["dd"] = actions.delete_buffer, -- Delete with dd
+							},
+						},
 					},
 				},
 				extensions = {

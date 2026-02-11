@@ -17,9 +17,9 @@ return {
 			-- We use mason to manage LSP for a specific language.
 			{ "williamboman/mason.nvim", config = true },
 			-- We use mason-lspconfig to tell nvim more capabilities.
-			"williamboman/mason-lspconfig.nvim",
+			{ "williamboman/mason-lspconfig.nvim", version = "1.31.0" },
 			-- We use mason-tool-installer to install LSP for a specific language
-			"WhoIsSethDaniel/mason-tool-installer.nvim",
+			-- { "WhoIsSethDaniel/mason-tool-installer.nvim", version = "1.2.0" },
 			-- Allows extra capabilities provided by nvim-cmp
 			"hrsh7th/cmp-nvim-lsp",
 
@@ -103,30 +103,35 @@ return {
 					cmd = { "verible-verilog-ls", "--rules=-line-length,-no-tabs" },
 				},
 			}
+
 			-- Ensure the servers and tools above are installed
 			require("mason").setup()
 
-			-- You can add other tools here that you want Mason to install
-			-- for you, so that they are available from within Neovim.
-			local ensure_installed = vim.tbl_keys(servers or {})
-			vim.list_extend(ensure_installed, {
-				"stylua", -- Used to format Lua code
-				"isort", -- Used to format python code
-				"black", -- Used to format python code
-				"clang-format", -- Used to format c code
-				"verible", -- Used to format verilog and systemverilog code
-			})
-			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-
-			---@diagnostic disable-next-line: missing-fields
+			-- Setup mason-lspconfig first with explicit configuration
 			require("mason-lspconfig").setup({
-				handlers = {
-					function(server_name)
-						local server = servers[server_name] or {}
-						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-						require("lspconfig")[server_name].setup(server)
-					end,
-				},
+				ensure_installed = vim.tbl_keys(servers),
+				automatic_installation = true,
+			})
+
+			-- -- You can add other tools here that you want Mason to install
+			-- -- for you, so that they are available from within Neovim.
+			-- local ensure_installed = vim.tbl_keys(servers or {})
+			-- vim.list_extend(ensure_installed, {
+			-- 	"stylua", -- Used to format Lua code
+			-- 	"isort", -- Used to format python code
+			-- 	"black", -- Used to format python code
+			-- 	"clang-format", -- Used to format c code
+			-- 	"verible", -- Used to format verilog and systemverilog code
+			-- })
+			-- require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+			--
+			-- Setup handlers after mason-lspconfig is configured
+			require("mason-lspconfig").setup_handlers({
+				function(server_name)
+					local server = servers[server_name] or {}
+					server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+					require("lspconfig")[server_name].setup(server)
+				end,
 			})
 		end,
 	},
