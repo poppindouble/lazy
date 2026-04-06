@@ -103,7 +103,6 @@ vim.keymap.set("n", "*", function()
     vim.opt.hlsearch = true
 end, { desc = "Search for word under cursor (no jump)" })
 
--- Search for SELECTED text without jumping
 vim.keymap.set("x", "*", function()
   -- 1. Yank the current selection into the 'v' register
   vim.cmd('noau normal! "vy')
